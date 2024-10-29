@@ -14,4 +14,14 @@ class Task extends Model
         'status',
         'due_date'
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -12,4 +12,9 @@ class Client extends Model
         'vat_number',
         'address',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
