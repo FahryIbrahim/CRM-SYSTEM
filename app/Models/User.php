@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -47,17 +48,32 @@ class User extends Authenticatable
         ];
     }
 
-    public function tasks()
+    /**
+     * Get the tasks for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<App\Models\Task,App\Models\User>
+     */
+    public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
     }
 
-    public function projects()
+    /**
+     * Get the projects for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<App\Models\Project,App\Models\User>
+     */
+    public function projects(): HasMany
     {
         return $this->hasMany(Project::class);
     }
 
-    public function clients()
+    /**
+     * Get the clients for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<App\Models\Client,App\Models\User>
+     */
+    public function clients(): HasMany
     {
         return $this->hasMany(Client::class);
     }
