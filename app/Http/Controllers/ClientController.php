@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Models\Client;
+use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -13,7 +14,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+
+        return view("pages.clients.index", compact("clients"));
     }
 
     /**
@@ -21,7 +24,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view("pages.clients.create");
     }
 
     /**
@@ -29,7 +32,24 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-        //
+        try {
+            Client::create([
+                'user_id' => $request->user_id,
+                'company_name' => $request->company_name,
+                'vat_number' => $request->vat_number,
+                'address' => $request->address,
+            ]);
+
+            return redirect()
+                ->route('clients.index')
+                ->with('success', 'Client created successfully.');
+        } catch (\Exception $e) {
+            Log::error('Error creating client: ' . $e->getMessage());
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Failed to create client. Please try again.');
+        }
     }
 
     /**
@@ -45,7 +65,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('pages.clients.edit', compact('client'));
     }
 
     /**
@@ -53,7 +73,24 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        //
+        try {
+            $client->update([
+                'user_id' => $request->user_id,
+                'company_name' => $request->company_name,
+                'vat_number' => $request->vat_number,
+                'address' => $request->address,
+            ]);
+
+            return redirect()
+                ->route('clients.index')
+                ->with('success', 'Client updated successfully.');
+        } catch (\Exception $e) {
+            Log::error('Error updating client: ' . $e->getMessage());
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Failed to update client. Please try again.');
+        }
     }
 
     /**
@@ -61,6 +98,16 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        try {
+            $client->delete();
+            return redirect()
+                ->route('clients.index')
+                ->with('success', 'Client deleted successfully.');
+        } catch (\Exception $e) {
+            Log::error('Error deleting client: ' . $e->getMessage());
+            return redirect()
+                ->back()
+                ->with('error', 'Failed to delete client. Please try again.');
+        }
     }
 }

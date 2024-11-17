@@ -25,7 +25,7 @@
                                 </span>
                             </h5>
                             <h3 class="mb-0">
-                                <strong>42</strong>
+                                <strong>{{ $totalUsers }}</strong>
                             </h3>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                                 </span>
                             </h5>
                             <h3 class="mb-0">
-                                <strong>34</strong>
+                                <strong>{{ $totalClients }}</strong>
                             </h3>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                                 </span>
                             </h5>
                             <h3 class="mb-0">
-                                <strong>70</strong>
+                                <strong>{{ $totalProjects }}</strong>
                             </h3>
 
                         </div>
@@ -83,7 +83,7 @@
                                 </span>
                             </h5>
                             <h3 class="mb-0">
-                                <strong>234</strong>
+                                <strong>{{ $totalTasks }}</strong>
                             </h3>
 
                         </div>

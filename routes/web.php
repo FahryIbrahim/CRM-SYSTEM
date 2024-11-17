@@ -1,29 +1,38 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/dashboard');
-
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
+// Guest Routes
+Route::middleware('guest')->group(function () {
+    Route::view('/login', 'auth.login')->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
 });
 
-Route::get('/user', function () {
-    return view('pages.user');
-});
+// Authenticated Routes
+Route::middleware('auth')->group(function () {
+    // Redirect root to dashboard
+    Route::redirect('/', '/dashboard');
 
-Route::get('/client', function () {
-    return view('pages.client');
-});
+    // Dashboard Route
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/project', function () {
-    return view('pages.project');
-});
+    // User Routes - using resource with explicit routes
+    Route::resource('users', UserController::class);
+    Route::resource('clients', ClientController::class);
+    Route::resource('projects', ProjectController::class);
+    Route::resource('tasks', TaskController::class);
 
-Route::get('/task', function () {
-    return view('pages.task');
-});
+    // Basic view routes
+    Route::view('/client', 'pages.client');
+    Route::view('/project', 'pages.project');
+    Route::view('/task', 'pages.task');
 
-Route::get( '/login', function () {
-    return view('auth.sign-in');
+    // Logout Route
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

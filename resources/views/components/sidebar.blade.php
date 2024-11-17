@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('user') ? 'active' : '' }}" href="{{ url('/user') }}"
+                    <a class="sidebar-link {{ request()->is('users') ? 'active' : '' }}" href="{{ url('/users') }}"
                         aria-expanded="false">
                         <span>
                             <i class="ti ti-user"></i>
@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('client') ? 'active' : '' }}" href="{{ url('/client') }}"
+                    <a class="sidebar-link {{ request()->is('clients') ? 'active' : '' }}" href="{{ url('/clients') }}"
                         aria-expanded="false">
                         <span>
                             <i class="ti ti-building"></i>
@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('project') ? 'active' : '' }}" href="{{ url('/project') }}"
+                    <a class="sidebar-link {{ request()->is('projects') ? 'active' : '' }}" href="{{ url('/projects') }}"
                         aria-expanded="false">
                         <span>
                             <i class="ti ti-clipboard-list"></i>
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->is('task') ? 'active' : '' }}" href="{{ url('/task') }}"
+                    <a class="sidebar-link {{ request()->is('tasks') ? 'active' : '' }}" href="{{ url('/tasks') }}"
                         aria-expanded="false">
                         <span>
                             <i class="ti ti-file"></i>
